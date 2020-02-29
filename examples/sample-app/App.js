@@ -27,8 +27,8 @@ export default class ButtonBasics extends Component {
       true,
       true,
     )
-      .then(r => {
-        console.log(r);
+      .then(isVerified => {
+        console.log(isVerified);
       })
       .catch(e => {
         console.log(e);
