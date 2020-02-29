@@ -1,0 +1,33 @@
+{
+  "name": "react-native-appruve-mobile-sdk",
+  "title": "React Native Appruve Mobile Sdk",
+  "version": "0.0.1",
+  "description": "React Native Module for Appruve Mobile SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github_account/react-native-appruve-mobile-sdk.git",
+    "baseUrl": "https://github.com/github_account/react-native-appruve-mobile-sdk"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Laud Bruce-Tagoe",
+    "email": "laud@inclusiveinnovations.co"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.59.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.8.3",
+    "react-native": "^0.59.10"
+  }
+}
