@@ -2,6 +2,8 @@
 
 ## Getting started
 
+First get your API Token at https://www.appruve.co
+
 `$ npm install react-native-appruve-mobile-sdk --save`
 
 ## Usage

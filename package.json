@@ -13,7 +13,12 @@
     "baseUrl": "https://github.com/github_account/react-native-appruve-mobile-sdk"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "android",
+    "ios",
+    "mobile",
+    "appruve mobile sdk",
+    "identity verification"
   ],
   "author": {
     "name": "Laud Bruce-Tagoe",
