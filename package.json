@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-appruve-mobile-sdk.git",
-    "baseUrl": "https://github.com/github_account/react-native-appruve-mobile-sdk"
+    "url": "git+https://github.com/niinyarko/react-native-appruve-mobile-sdk.git",
+    "baseUrl": "https://github.com/niinyarko/react-native-appruve-mobile-sdk"
   },
   "keywords": [
     "react-native",
