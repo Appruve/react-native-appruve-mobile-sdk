@@ -22,6 +22,9 @@ import static co.appruve.identitysdk.Constants.APPRUVE_EXTRA_IS_VERIFIED;
 import static co.appruve.identitysdk.Constants.HEADER_COLOR;
 import static co.appruve.identitysdk.Constants.ICON_COLOR;
 import static co.appruve.identitysdk.Constants.ICON_TEXT_COLOR;
+import static co.appruve.identitysdk.Constants.IS_GHANA_ENABLED;
+import static co.appruve.identitysdk.Constants.IS_KENYA_ENABLED;
+import static co.appruve.identitysdk.Constants.IS_NIGERIA_ENABLED;
 import static co.appruve.identitysdk.Constants.NAVIGATION_BUTTON_BACKGROUND_COLOR;
 import static co.appruve.identitysdk.Constants.NORMAL_TEXT_COLOR;
 import static co.appruve.identitysdk.Constants.STATUS_BAR_COLOR;
@@ -111,6 +114,10 @@ public class AppruveMobileSdkModule extends ReactContextBaseJavaModule {
         extras.putString(ICON_COLOR, iconColor);
         extras.putString(ICON_TEXT_COLOR, iconTextColor);
         extras.putString(NAVIGATION_BUTTON_BACKGROUND_COLOR, navigationButtonBackgroundColor);
+        extras.putBoolean(IS_GHANA_ENABLED, isGhanaEnabled);
+        extras.putBoolean(IS_NIGERIA_ENABLED, isNigeriaEnabled);
+        extras.putBoolean(IS_KENYA_ENABLED, isKenyaEnabled);
+        
         verificationIntent.putExtras(extras);
 
         reactContext.startActivityForResult(verificationIntent, START_VERIFICATION_ACTIVITY_REQUEST, extras);
