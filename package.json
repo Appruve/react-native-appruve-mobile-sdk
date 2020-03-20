@@ -1,7 +1,7 @@
 {
   "name": "react-native-appruve-mobile-sdk",
   "title": "React Native Appruve Mobile Sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React Native Module for Appruve Mobile SDK",
   "main": "index.js",
   "scripts": {
