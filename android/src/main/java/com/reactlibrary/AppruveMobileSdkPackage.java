@@ -14,7 +14,7 @@ public class AppruveMobileSdkPackage implements ReactPackage {
     @NotNull
     @Override
     public List<NativeModule> createNativeModules(@NotNull ReactApplicationContext reactContext) {
-        return Collections.<NativeModule>singletonList(new AppruveMobileSdkModule(reactContext));
+        return Collections.singletonList(new AppruveMobileSdkModule(reactContext));
     }
 
     @NotNull

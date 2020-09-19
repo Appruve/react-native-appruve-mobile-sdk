@@ -10,27 +10,25 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
 import org.jetbrains.annotations.NotNull;
 
-import co.appruve.identitysdk.AppruveActivity;
+import java.util.HashMap;
+import java.util.Map;
 
-import static co.appruve.identitysdk.AppruveActivityKt.RESULT_SUCCESS_CODE;
-import static co.appruve.identitysdk.Constants.APPRUVE_API_TOKEN;
-import static co.appruve.identitysdk.Constants.APPRUVE_EXTRA_IS_VERIFIED;
-import static co.appruve.identitysdk.Constants.HEADER_COLOR;
-import static co.appruve.identitysdk.Constants.ICON_COLOR;
-import static co.appruve.identitysdk.Constants.ICON_TEXT_COLOR;
-import static co.appruve.identitysdk.Constants.IS_GHANA_ENABLED;
-import static co.appruve.identitysdk.Constants.IS_KENYA_ENABLED;
-import static co.appruve.identitysdk.Constants.IS_NIGERIA_ENABLED;
-import static co.appruve.identitysdk.Constants.NAVIGATION_BUTTON_BACKGROUND_COLOR;
-import static co.appruve.identitysdk.Constants.NORMAL_TEXT_COLOR;
-import static co.appruve.identitysdk.Constants.STATUS_BAR_COLOR;
-import static co.appruve.identitysdk.Constants.SUB_HEADER_COLOR;
-import static co.appruve.identitysdk.Constants.TEXT_LABEL_COLOR;
-import static co.appruve.identitysdk.Constants.TOOLBAR_BACKGROUND_COLOR;
+import co.appruve.identitysdk.VerificationActivity;
+
+import static co.appruve.identitysdk.ConstantsKt.APPRUVE_API_TOKEN;
+import static co.appruve.identitysdk.ConstantsKt.APPRUVE_EXTRA_DOCUMENT_TYPE;
+import static co.appruve.identitysdk.ConstantsKt.APPRUVE_EXTRA_ID_PHOTO_URL;
+import static co.appruve.identitysdk.ConstantsKt.APPRUVE_EXTRA_IS_VERIFIED;
+import static co.appruve.identitysdk.ConstantsKt.APPRUVE_EXTRA_SELFIE_PHOTO_URL;
+import static co.appruve.identitysdk.ConstantsKt.APPRUVE_EXTRA_VERIFICATION_ID;
+import static co.appruve.identitysdk.ConstantsKt.CUSTOM_PARAMS;
+import static co.appruve.identitysdk.ConstantsKt.IS_GHANA_ENABLED;
+import static co.appruve.identitysdk.ConstantsKt.IS_KENYA_ENABLED;
+import static co.appruve.identitysdk.ConstantsKt.IS_NIGERIA_ENABLED;
+import static co.appruve.identitysdk.VerificationActivityKt.RESULT_SUCCESS_CODE;
 
 public class AppruveMobileSdkModule extends ReactContextBaseJavaModule {
 
@@ -57,7 +55,19 @@ public class AppruveMobileSdkModule extends ReactContextBaseJavaModule {
                         } else if (resultCode == RESULT_SUCCESS_CODE) {
                             if (data != null && data.getExtras() != null) {
                                 boolean verified = data.getExtras().getBoolean(APPRUVE_EXTRA_IS_VERIFIED);
-                                mVerificationPromise.resolve(verified);
+                                String idPhotoUrl = data.getExtras().getString(APPRUVE_EXTRA_ID_PHOTO_URL);
+                                String selfiePhotoUrl = data.getExtras().getString(APPRUVE_EXTRA_SELFIE_PHOTO_URL);
+                                String id = data.getExtras().getString(APPRUVE_EXTRA_VERIFICATION_ID);
+                                String idType = data.getExtras().getString(APPRUVE_EXTRA_DOCUMENT_TYPE);
+
+                                HashMap<String, Object> responseData = new HashMap<>();
+                                responseData.put("id", id);
+                                responseData.put("isVerified", verified);
+                                responseData.put("idPhotoUrl", idPhotoUrl);
+                                responseData.put("selfiePhotoUrl", selfiePhotoUrl);
+                                responseData.put("idType", idType);
+
+                                mVerificationPromise.resolve(responseData);
                             } else {
                                 mVerificationPromise.reject(UNEXPECTED_ERROR, "An unexpected error occurred");
                             }
@@ -78,19 +88,10 @@ public class AppruveMobileSdkModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startVerification(String apiToken,
-                                  String statusBarColor,
-                                  String toolbarBackgroundColor,
-                                  String headerTextColor,
-                                  String subHeaderTextColor,
-                                  String textLabelColor,
-                                  String normalTextColor,
-                                  String iconColor,
-                                  String iconTextColor,
-                                  String navigationButtonBackgroundColor,
+                                  HashMap<String, Object> customParams,
                                   boolean isGhanaEnabled,
                                   boolean isNigeriaEnabled,
                                   boolean isKenyaEnabled, final Promise promise) {
-
 
         Activity currentActivity = getCurrentActivity();
 
@@ -101,22 +102,32 @@ public class AppruveMobileSdkModule extends ReactContextBaseJavaModule {
 
         mVerificationPromise = promise;
 
-        final Intent verificationIntent = new Intent(reactContext, AppruveActivity.class);
+        final Intent verificationIntent = new Intent(reactContext, VerificationActivity.class);
         final Bundle extras = new Bundle();
+        final Bundle customParamsBundle = new Bundle();
+
+        for (Map.Entry<String, Object> entry : customParams.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            if (value instanceof String) {
+                customParamsBundle.putString(key, (String) value);
+            } else if (value instanceof Integer) {
+                customParamsBundle.putInt(key, (int) value);
+            }  else if (value instanceof Boolean) {
+                customParamsBundle.putBoolean(key, (boolean) value);
+            }  else if (value instanceof Double) {
+                customParamsBundle.putDouble(key, (double) value);
+            } else if (value instanceof Float) {
+                customParamsBundle.putFloat(key, (float) value);
+            }
+        }
 
         extras.putString(APPRUVE_API_TOKEN, apiToken);
-        extras.putString(STATUS_BAR_COLOR, statusBarColor);
-        extras.putString(TOOLBAR_BACKGROUND_COLOR, toolbarBackgroundColor);
-        extras.putString(HEADER_COLOR, headerTextColor);
-        extras.putString(SUB_HEADER_COLOR, subHeaderTextColor);
-        extras.putString(TEXT_LABEL_COLOR, textLabelColor);
-        extras.putString(NORMAL_TEXT_COLOR, normalTextColor);
-        extras.putString(ICON_COLOR, iconColor);
-        extras.putString(ICON_TEXT_COLOR, iconTextColor);
-        extras.putString(NAVIGATION_BUTTON_BACKGROUND_COLOR, navigationButtonBackgroundColor);
         extras.putBoolean(IS_GHANA_ENABLED, isGhanaEnabled);
         extras.putBoolean(IS_NIGERIA_ENABLED, isNigeriaEnabled);
         extras.putBoolean(IS_KENYA_ENABLED, isKenyaEnabled);
+        extras.putBundle(CUSTOM_PARAMS, customParamsBundle);
         
         verificationIntent.putExtras(extras);
 
