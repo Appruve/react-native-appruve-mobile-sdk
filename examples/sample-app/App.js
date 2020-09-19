@@ -14,21 +14,17 @@ export default class ButtonBasics extends Component {
   _onPressButton() {
     AppruveMobileSdk.startVerification(
       'YOUR API TOKEN',
-      '#00693C',
-      '#0F5738',
-      '#292f33',
-      '#292f33',
-      '#00693C',
-      '#292f33',
-      '#75AF96',
-      '#292f33',
-      '#75AF96',
-      true,
-      true,
-      true,
+      {userId: '47a025e3-d4a4-4a8f-aa9d-d9dde90d8a15'},
+      true, // isGhanaEnabled
+      true, // isNigeriaEnabled
+      true, // isKenyaEnabled
     )
-      .then(isVerified => {
-        console.log(isVerified);
+      .then(response => {
+        console.log(`IS_VERIFIED: ${response.isVerified}`);
+        console.log(`VERIFICATION_ID ${response.id}`);
+        console.log(`ID_PHOTO_URL: ${response.idPhotoUrl}`);
+        console.log(`SELFIE_PHOTO_URL: ${response.selfiePhotoUrl}`);
+        console.log(`ID_TYPE: ${response.idType}`);
       })
       .catch(e => {
         console.log(e);
