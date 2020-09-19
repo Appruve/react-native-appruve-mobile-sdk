@@ -10,6 +10,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -88,7 +89,7 @@ public class AppruveMobileSdkModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startVerification(String apiToken,
-                                  HashMap<String, Object> customParams,
+                                  ReadableMap customParams,
                                   boolean isGhanaEnabled,
                                   boolean isNigeriaEnabled,
                                   boolean isKenyaEnabled, final Promise promise) {
@@ -106,7 +107,7 @@ public class AppruveMobileSdkModule extends ReactContextBaseJavaModule {
         final Bundle extras = new Bundle();
         final Bundle customParamsBundle = new Bundle();
 
-        for (Map.Entry<String, Object> entry : customParams.entrySet()) {
+        for (Map.Entry<String, Object> entry : customParams.toHashMap().entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
 
