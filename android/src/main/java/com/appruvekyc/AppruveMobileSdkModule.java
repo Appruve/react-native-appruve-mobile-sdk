@@ -11,10 +11,11 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import co.appruve.identitysdk.VerificationActivity;
@@ -61,14 +62,14 @@ public class AppruveMobileSdkModule extends ReactContextBaseJavaModule {
                                 String id = data.getExtras().getString(APPRUVE_EXTRA_VERIFICATION_ID);
                                 String idType = data.getExtras().getString(APPRUVE_EXTRA_DOCUMENT_TYPE);
 
-                                HashMap<String, Object> responseData = new HashMap<>();
-                                responseData.put("id", id);
-                                responseData.put("isVerified", verified);
-                                responseData.put("idPhotoUrl", idPhotoUrl);
-                                responseData.put("selfiePhotoUrl", selfiePhotoUrl);
-                                responseData.put("idType", idType);
+                                WritableMap resultData = new WritableNativeMap();
+                                resultData.putString("id", id);
+                                resultData.putBoolean("isVerified", verified);
+                                resultData.putString("idPhotoUrl", idPhotoUrl);
+                                resultData.putString("selfiePhotoUrl", selfiePhotoUrl);
+                                resultData.putString("idType", idType);
 
-                                mVerificationPromise.resolve(responseData);
+                                mVerificationPromise.resolve(resultData);
                             } else {
                                 mVerificationPromise.reject(UNEXPECTED_ERROR, "An unexpected error occurred");
                             }
