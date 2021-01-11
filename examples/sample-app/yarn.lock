@@ -5069,9 +5069,10 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.0.tgz#0f37c3613c34fe6b37cd7f763a0d6293ab15c527"
   integrity sha512-GFMtL0vHkiBv9HluwNZTggSn/sCyEt9n02aM0dSAjGGyqyNlAyftYm4phPxdvCigG15JreC5biwxCgTAJZ7yAA==
 
-react-native-appruve-mobile-sdk@../../react-native-appruve-mobile-sdk-0.0.4.tgz:
+react-native-appruve-mobile-sdk@^0.0.4:
   version "0.0.4"
-  resolved "../../react-native-appruve-mobile-sdk-0.0.4.tgz#3cee7d5bc97c778ca7bb3c03ef065c79c75bf97e"
+  resolved "https://registry.yarnpkg.com/react-native-appruve-mobile-sdk/-/react-native-appruve-mobile-sdk-0.0.4.tgz#3cee7d5bc97c778ca7bb3c03ef065c79c75bf97e"
+  integrity sha512-Iu9eO1gbdNECD0nqKCGrBYJ2EISSnUEg0/+JG3aeEFQogENJjdinKM99jAji29YvjBaWbE87KzhX08DSO049kg==
 
 react-native@0.61.5:
   version "0.61.5"
