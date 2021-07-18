@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
+
 import co.appruve.identitysdk.VerificationActivity;
 
 import static co.appruve.identitysdk.ConstantsKt.APPRUVE_API_TOKEN;
